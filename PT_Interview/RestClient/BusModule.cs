@@ -1,6 +1,5 @@
 using System;
 using Autofac;
-using CommonContract;
 using MassTransit;
 
 namespace RestClient
@@ -19,10 +18,7 @@ namespace RestClient
                         h.Password("guest");
                     });
 
-                    cfg.ReceiveEndpoint("my_queue", ec =>
-                    {
-                        ec.LoadFrom(context);
-                    });
+                    cfg.ReceiveEndpoint("my_queue", ec => { ec.LoadFrom(context); });
                 });
                 return busControl;
             }).SingleInstance()
