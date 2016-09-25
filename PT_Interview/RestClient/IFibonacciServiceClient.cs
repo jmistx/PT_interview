@@ -4,6 +4,6 @@ namespace RestClient
 {
     public interface IFibonacciServiceClient
     {
-        void RequestNumber(UInt64 number);
+        void RequestNextNumber(UInt64 number);
     }
 }

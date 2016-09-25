@@ -4,6 +4,7 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using MassTransit;
 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace RestService
 {
     public class WebApiApplication : System.Web.HttpApplication

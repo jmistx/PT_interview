@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Security;
 using CommonContract;
 using Domain;
+using log4net;
 using MassTransit;
 
 namespace RestService.Controllers
@@ -15,11 +11,13 @@ namespace RestService.Controllers
     {
         private readonly IBusControl _busControl;
         private readonly IFibonacciCalculator _fibonacci;
+        private readonly ILog _log;
 
-        public FibonacciController(IBusControl busControl, IFibonacciCalculator fibonacci)
+        public FibonacciController(IBusControl busControl, IFibonacciCalculator fibonacci, ILog log)
         {
             _busControl = busControl;
             _fibonacci = fibonacci;
+            _log = log;
         }
 
         [HttpPost]
@@ -33,13 +31,9 @@ namespace RestService.Controllers
                     Number = nextNumber
                 });
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
-                //log argument exception
-            }
-            catch (OverflowException ex)
-            {
-                //log overflow exception
+                _log.Debug(ex);
             }
         }
     }

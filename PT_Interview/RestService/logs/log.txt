@@ -1,0 +1,3 @@
+2016-09-26 00:11:51,757 [8] DEBUG  - System.ArgumentException: 6 not a fibonacci number
+   at Domain.FibonacciCalculator.GetNumberByPreviousNumber(UInt64 previousNumber) in \\Mac\Home\Documents\PT_interview\src\PT_Interview\Domain\FibonacciCalculator.cs:line 29
+   at RestService.Controllers.FibonacciController.Post(FibonacciNumberRequest request) in \\Mac\Home\Documents\PT_interview\src\PT_Interview\RestService\Controllers\FibonacciController.cs:line 33

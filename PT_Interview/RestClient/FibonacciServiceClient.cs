@@ -5,7 +5,7 @@ namespace RestClient
 {
     internal class FibonacciServiceClient : IFibonacciServiceClient
     {
-        public void RequestNumber(UInt64 number)
+        public void RequestNextNumber(UInt64 number)
         {
             var client = new RestSharp.RestClient("http://localhost:50990");
             var request = new RestRequest("api/Fibonacci", Method.POST);

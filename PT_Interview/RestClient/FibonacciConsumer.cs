@@ -25,7 +25,7 @@ namespace RestClient
             try
             {
                 UInt64 nextFibonacciNumber = _fibonacci.GetNumberByPreviousNumber(recievedNumber);
-                _client.RequestNumber(nextFibonacciNumber);
+                _client.RequestNextNumber(nextFibonacciNumber);
             }
             catch (ArgumentException ex)
             {

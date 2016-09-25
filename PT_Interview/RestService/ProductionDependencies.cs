@@ -1,5 +1,6 @@
 using Autofac;
 using Domain;
+using log4net;
 
 namespace RestService
 {
@@ -9,6 +10,7 @@ namespace RestService
         {
             builder.RegisterModule<BusModule>();
             builder.RegisterType<FibonacciCalculator>().As<IFibonacciCalculator>();
+            builder.Register(_ => LogManager.GetLogger("")).As<ILog>();
         }
     }
 }
