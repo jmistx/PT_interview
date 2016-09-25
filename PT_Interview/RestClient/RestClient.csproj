@@ -78,6 +78,8 @@
     <Compile Include="BusModule.cs" />
     <Compile Include="ConsumerModule.cs" />
     <Compile Include="FibonacciConsumer.cs" />
+    <Compile Include="FibonacciServiceClient.cs" />
+    <Compile Include="IFibonacciServiceClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Reflection;
 using System.Web.Http;
-using System.Web.Routing;
-using CommonContract;
+using Autofac;
+using Autofac.Integration.WebApi;
 using MassTransit;
 
 namespace RestService
@@ -12,33 +9,30 @@ namespace RestService
     public class WebApiApplication : System.Web.HttpApplication
     {
         static IBusControl _busControl;
-        public static IBus BusControl
-        {
-            get { return _busControl; }
-        }
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            _busControl = ConfigureBus();
+            var container = ConfigureIocContainer();
+
+            _busControl = container.Resolve<IBusControl>();
             _busControl.Start();
         }
+
+        private static IContainer ConfigureIocContainer()
+        {
+            var builder = new ContainerBuilder();
+            var config = GlobalConfiguration.Configuration;
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterModule<ProductionDependencies>();
+            var container = builder.Build();
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            return container;
+        }
+
         protected void Application_End()
         {
-            _busControl.Stop(); ;
+            _busControl.Stop();
         }
-
-        IBusControl ConfigureBus()
-        {
-            return Bus.Factory.CreateUsingRabbitMq(cfg =>
-            {
-                var host = cfg.Host(new Uri("rabbitmq://localhost/"), h =>
-                {
-                    h.Username("guest");
-                    h.Password("guest");
-                });
-
-            });
-
-        }
+        
     }
 }
