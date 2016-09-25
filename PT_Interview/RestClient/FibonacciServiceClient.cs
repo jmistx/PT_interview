@@ -1,10 +1,18 @@
 using System;
+using log4net;
 using RestSharp;
 
 namespace RestClient
 {
     internal class FibonacciServiceClient : IFibonacciServiceClient
     {
+        private readonly ILog _log;
+
+        public FibonacciServiceClient(ILog log)
+        {
+            _log = log;
+        }
+
         public void RequestNextNumber(UInt64 number)
         {
             var client = new RestSharp.RestClient("http://localhost:50990");
@@ -14,7 +22,7 @@ namespace RestClient
             var response = client.Execute(request);
             var content = response.Content;
 
-            Console.WriteLine("Content from service: {0}", content);
+            _log.Debug($"Content from service: {content}");
         }
     }
 }

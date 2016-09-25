@@ -25,7 +25,7 @@ namespace RestService.Controllers
         {
             try
             {
-                UInt64 nextNumber = _fibonacci.GetNumberByPreviousNumber(request.Number);
+                UInt64 nextNumber =  _fibonacci.GetNumberByPreviousNumber(request.Number);
                 _busControl.Publish(new CalculateNextFibonacciNumber
                 {
                     Number = nextNumber

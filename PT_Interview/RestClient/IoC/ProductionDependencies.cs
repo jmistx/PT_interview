@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Domain;
+using log4net;
 
 namespace RestClient.IoC
 {
@@ -11,6 +12,7 @@ namespace RestClient.IoC
             builder.RegisterModule<ConsumerModule>();
             builder.RegisterType<FibonacciServiceClient>().As<IFibonacciServiceClient>();
             builder.RegisterType<FibonacciCalculator>().As<IFibonacciCalculator>();
+            builder.Register(_ => LogManager.GetLogger("")).As<ILog>();
         }
     }
 }

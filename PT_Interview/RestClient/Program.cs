@@ -3,6 +3,7 @@ using Autofac;
 using MassTransit;
 using RestClient.IoC;
 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace RestClient
 {
     internal class Program

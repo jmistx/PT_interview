@@ -18,7 +18,7 @@ namespace RestClient.IoC
                         h.Password("guest");
                     });
 
-                    cfg.ReceiveEndpoint("my_queue", ec => { ec.LoadFrom(context); });
+                    cfg.ReceiveEndpoint("fibonacci_queue", ec => { ec.LoadFrom(context); });
                 });
                 return busControl;
             }).SingleInstance()

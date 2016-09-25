@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using CommonContract;
 using Domain;
+using log4net;
 using MassTransit;
 
 namespace RestClient
@@ -10,30 +11,29 @@ namespace RestClient
     {
         private readonly IFibonacciServiceClient _client;
         private readonly IFibonacciCalculator _fibonacci;
+        private readonly ILog _log;
 
-        public FibonacciConsumer(IFibonacciServiceClient client, IFibonacciCalculator fibonacci)
+        public FibonacciConsumer(IFibonacciServiceClient client, IFibonacciCalculator fibonacci, ILog log)
         {
             _client = client;
             _fibonacci = fibonacci;
+            _log = log;
         }
 
         public async Task Consume(ConsumeContext<CalculateNextFibonacciNumber> context)
         {
             UInt64 recievedNumber = context.Message.Number;
-            await Console.Out.WriteLineAsync($"Received: {context.Message.Number}");
+            _log.Info($"Received: {context.Message.Number}");
 
             try
             {
                 UInt64 nextFibonacciNumber = _fibonacci.GetNumberByPreviousNumber(recievedNumber);
                 _client.RequestNextNumber(nextFibonacciNumber);
+                _log.Info($"Sent: {nextFibonacciNumber}");
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
-                await Console.Out.WriteLineAsync($"Argument exception: {ex.Message}");
-            }
-            catch (OverflowException ex)
-            {
-                await Console.Out.WriteLineAsync($"Overflow exception: {ex.Message}");
+                _log.Debug(ex);
             }
         }
     }
