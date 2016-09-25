@@ -13,14 +13,21 @@ namespace RestClient
             builder.RegisterModule<ProductionDependencies>();
             var container = builder.Build();
 
-            BeginConversation(container);
+            BeginConversation(container, args);
         }
 
-        private static void BeginConversation(IContainer container)
+        private static UInt64 ParseToInitialNumber(string[] args)
+        {
+            return UInt64.Parse(args[0]);
+        }
+
+        private static void BeginConversation(IContainer container, string[] args)
         {
             var bus = container.Resolve<IBusControl>();
             var fibonacciServiceClient = container.Resolve<IFibonacciServiceClient>();
-            fibonacciServiceClient.RequestNumber(5);
+            var initialNumber = ParseToInitialNumber(args);
+
+            fibonacciServiceClient.RequestNextNumber(initialNumber);
 
             using (bus.Start())
             {
