@@ -2,7 +2,7 @@ using System;
 using Autofac;
 using MassTransit;
 
-namespace RestClient
+namespace RestClient.IoC
 {
     public class BusModule : Module
     {

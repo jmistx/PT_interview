@@ -2,23 +2,23 @@
 
 namespace Domain
 {
-    public class FibonacciCalculator
+    public class FibonacciCalculator : IFibonacciCalculator
     {
-        public int GetNumberByPreviousNumber(int previousNumber)
+        public UInt64 GetNumberByPreviousNumber(UInt64 previousNumber)
         {
             if (previousNumber <= 0)
             {
-                return 0;
+                throw new ArgumentException("negative or zero argument");
             }
 
-            int prev = 1;
-            int current = 1;
-            int next = 2;
+            UInt64 prev = 1;
+            UInt64 current = 1;
+            UInt64 next = 2;
             while (current < previousNumber)
             {
                 prev = current;
                 current = next;
-                next = prev + current;
+                next = checked(prev + current);
             }
 
             if (current == previousNumber)
@@ -26,7 +26,7 @@ namespace Domain
                 return next;
             }
 
-            throw new ArgumentException();
+            throw new ArgumentException($"{previousNumber} not a fibonacci number");
         }
     }
 }

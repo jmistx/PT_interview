@@ -10,7 +10,7 @@ namespace RestService
         {
             var bus = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
-                var host = cfg.Host(new Uri("rabbitmq://localhost/"), h =>
+                cfg.Host(new Uri("rabbitmq://localhost/"), h =>
                 {
                     h.Username("guest");
                     h.Password("guest");

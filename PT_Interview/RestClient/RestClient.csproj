@@ -75,11 +75,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusModule.cs" />
-    <Compile Include="ConsumerModule.cs" />
+    <Compile Include="IoC\BusModule.cs" />
+    <Compile Include="IoC\ConsumerModule.cs" />
     <Compile Include="FibonacciConsumer.cs" />
     <Compile Include="FibonacciServiceClient.cs" />
     <Compile Include="IFibonacciServiceClient.cs" />
+    <Compile Include="IoC\ProductionDependencies.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -91,6 +92,10 @@
     <ProjectReference Include="..\CommonContract\CommonContract.csproj">
       <Project>{B36373F4-135C-48C9-9470-1100C42D60C7}</Project>
       <Name>CommonContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{8731D251-0BF6-41DF-8A9D-294E9A9F4D35}</Project>
+      <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

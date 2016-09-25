@@ -1,7 +1,9 @@
-﻿namespace CommonContract
+﻿using System;
+
+namespace CommonContract
 {
     public class CalculateNextFibonacciNumber
     {
-        public int Number { get; set; }
+        public UInt64 Number { get; set; }
     }
 }

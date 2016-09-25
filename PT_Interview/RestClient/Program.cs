@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using MassTransit;
+using RestClient.IoC;
 
 namespace RestClient
 {
@@ -9,9 +10,7 @@ namespace RestClient
         private static void Main(string[] args)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterModule<BusModule>();
-            builder.RegisterModule<ConsumerModule>();
-            builder.RegisterType<FibonacciServiceClient>().As<IFibonacciServiceClient>();
+            builder.RegisterModule<ProductionDependencies>();
             var container = builder.Build();
 
             BeginConversation(container);

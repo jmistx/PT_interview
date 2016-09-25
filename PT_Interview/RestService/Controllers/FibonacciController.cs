@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Security;
 using CommonContract;
+using Domain;
 using MassTransit;
 
 namespace RestService.Controllers
@@ -13,19 +14,33 @@ namespace RestService.Controllers
     public class FibonacciController : ApiController
     {
         private readonly IBusControl _busControl;
+        private readonly IFibonacciCalculator _fibonacci;
 
-        public FibonacciController(IBusControl busControl)
+        public FibonacciController(IBusControl busControl, IFibonacciCalculator fibonacci)
         {
             _busControl = busControl;
+            _fibonacci = fibonacci;
         }
 
         [HttpPost]
         public void Post(FibonacciNumberRequest request)
         {
-            _busControl.Publish(new CalculateNextFibonacciNumber
+            try
             {
-                Number = request.Number + 1
-            });
+                UInt64 nextNumber = _fibonacci.GetNumberByPreviousNumber(request.Number);
+                _busControl.Publish(new CalculateNextFibonacciNumber
+                {
+                    Number = nextNumber
+                });
+            }
+            catch (ArgumentException ex)
+            {
+                //log argument exception
+            }
+            catch (OverflowException ex)
+            {
+                //log overflow exception
+            }
         }
     }
 }

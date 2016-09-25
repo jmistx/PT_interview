@@ -141,6 +141,10 @@
       <Project>{b36373f4-135c-48c9-9470-1100c42d60c7}</Project>
       <Name>CommonContract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{8731D251-0BF6-41DF-8A9D-294E9A9F4D35}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

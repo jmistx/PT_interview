@@ -1,7 +1,9 @@
+using System;
+
 namespace RestClient
 {
     public interface IFibonacciServiceClient
     {
-        void RequestNumber(int number);
+        void RequestNumber(UInt64 number);
     }
 }

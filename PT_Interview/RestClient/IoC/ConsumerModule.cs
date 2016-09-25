@@ -1,6 +1,6 @@
 using Autofac;
 
-namespace RestClient
+namespace RestClient.IoC
 {
     public class ConsumerModule : Module
     {

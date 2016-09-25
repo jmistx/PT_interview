@@ -1,13 +1,15 @@
-using Autofac;
+﻿using Autofac;
 using Domain;
 
-namespace RestService
+namespace RestClient.IoC
 {
-    public class ProductionDependencies : Module
+    internal class ProductionDependencies : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterModule<BusModule>();
+            builder.RegisterModule<ConsumerModule>();
+            builder.RegisterType<FibonacciServiceClient>().As<IFibonacciServiceClient>();
             builder.RegisterType<FibonacciCalculator>().As<IFibonacciCalculator>();
         }
     }
