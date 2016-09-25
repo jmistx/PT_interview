@@ -13,19 +13,15 @@ namespace RestClient
             {
                 var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
-                    var host = cfg.Host(new Uri("rabbitmq://localhost/"), h =>
+                    cfg.Host(new Uri("rabbitmq://localhost/"), h =>
                     {
                         h.Username("guest");
                         h.Password("guest");
                     });
 
-                    cfg.ReceiveEndpoint(host, "my_queue", endpoint =>
+                    cfg.ReceiveEndpoint("my_queue", ec =>
                     {
-                        endpoint.Handler<CalculateNextFibonacciNumber>(async context1 =>
-                        {
-                            await Console.Out.WriteLineAsync($"Received: {context1.Message.Number}");
-                            Program.RequestNumber(context1.Message.Number + 1);
-                        });
+                        ec.LoadFrom(context);
                     });
                 });
                 return busControl;
