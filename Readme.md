@@ -1,6 +1,4 @@
-# [Positive Technologies](https://www.ptsecurity.com/) job interview
-
-This code is old but I still think it is clean and nice. If you somewhy interested my codestyle, my advise to start from tests.
+# [Positive Technologies](https://www.ptsecurity.com/) job interview task
 
 ```
 Disclaimer: This code is old but I still think it is clean and nice. 
