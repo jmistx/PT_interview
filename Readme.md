@@ -13,7 +13,7 @@ If you somewhy interested my codestyle, I advise to start from tests.
 - **A** send **N[i]** to **B**
 - **B** calculates **N[i - 1] + N[i]** then send it to **A**
 - **A** do the same thing
-– infinite loop here
+- infinite loop here
 
 Features:
 - **A** get initial number from `stdin`.
