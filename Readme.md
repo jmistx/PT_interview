@@ -7,6 +7,7 @@ Disclaimer: This code is old but I still think it is clean and nice. If you some
 Тестовая задача для интервью в Posititve Technologies.
 
 Disclaimer: Этому коду много лет. Технологии ушли вперёд. Но я всё равно считаю его чистым и красивым. Если вам по какой-то причине интересно посмотреть, как я писал код, советую начать смотреть с тестов.
+
 ----
 
 Prerequisites:
